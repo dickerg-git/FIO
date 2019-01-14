@@ -1,0 +1,40 @@
+##########################################################################################
+#
+#	Test Sequence:
+#		1) Precondition drive 2x user capacity w/ 128K Sequential Writes @ QD=128
+#		2) Run 128K SEQ W/R and 4K random r/w performance
+#
+#	Notes:
+#		Purge the drive before running this test.
+
+[global]
+filename=/dev/nvme0n1	  		# test device
+ioengine=libaio					# Default engine for CentOS
+disable_slat=1					# disables Submission Latency recording
+disable_lat=1					# disables Total Latency recording
+direct=1						# Uses direct IO's, bypass OS buffer
+ba=4k							# all IO's 4K aligned
+size=100%						# 
+norandommap
+group_reporting
+refill_buffers
+unified_rw_reporting=1
+percentile_list=95.0:99.0:99.5:99.9:99.99:99.999:99.9999:99.99999	# defines percentile buckets in mS
+
+
+
+
+#################################################
+# 	   Start random write test    			    #
+#################################################
+
+[4K_Rand_Read_Q4]         # Job name
+stonewall
+numjobs=1				        # Num of jobs(accdroing to CPU threads)
+bs=4K						# block transfer size
+rw=randread					# r/w
+iodepth=128
+size=5g
+time_based=1
+runtime=900
+
