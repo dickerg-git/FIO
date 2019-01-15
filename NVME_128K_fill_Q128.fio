@@ -24,18 +24,18 @@ percentile_list=95.0:99.0:99.5:99.9:99.99:99.999:99.9999:99.99999	# defines perc
 
 
 ###################################################
-### 	   Start SEQ read test    	          #
+### 	   Start SEQ fill 100%    	          #
 ###################################################
 
-[128K_SEQ_Read_Q128_5]         # Job name
+[128K_SEQ_Fill_Q128]         # Job name
 stonewall
 numjobs=1		     # Num of jobs(accdroing to CPU threads)
 bs=128K				# block transfer size
-rw=read				# r/w
+rw=write			# r/w
 iodepth=8
 size=100%                       # Detect full file size
 time_based=0
-runtime=900 			#run time
+runtime=1800 			# max run time
 
 ###################################################
 ### 	   Start SEQ read test    	          #
