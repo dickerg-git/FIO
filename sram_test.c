@@ -1,15 +1,16 @@
 
 unsigned int 
-diag_asia_fibre_sram_test( UINT32 * start, UINT32 length )
+sram_test( UINT32 * start, UINT32 length )
 {
 
 #define PATTERN_1 0xAA55AACC
 
 register UINT32   *  src_ptr;
 register UINT32      loop_length;
-register UINT32      xx, expd, recd;
+register UINT32      xx, expd, recd, fail;
 
    expd = recd = 0;
+   fail = 0;
    
 /*-------------------------------------------------------------------
 *   Setup the RAM test.
@@ -38,7 +39,7 @@ register UINT32      xx, expd, recd;
       {
          recd = *src_ptr;
          expd = PATTERN_1;
-         *Asia_sim_verilog_ctl_1_rw = diag_output.failed_register = (UINT32)src_ptr;
+         fail = (UINT32)src_ptr;
          goto error_end;
       }
       
@@ -53,7 +54,7 @@ register UINT32      xx, expd, recd;
       {
          recd = *src_ptr;
          expd = ~PATTERN_1;
-         *Asia_sim_verilog_ctl_1_rw = diag_output.failed_register = (UINT32)src_ptr;
+         fail = (UINT32)src_ptr;
          goto error_end;
       }
       
@@ -69,13 +70,13 @@ register UINT32      xx, expd, recd;
       {
          recd = *src_ptr;
          expd = PATTERN_1;
-         *Asia_sim_verilog_ctl_1_rw = diag_output.failed_register = (UINT32)src_ptr;
+         fail = (UINT32)src_ptr;
          goto error_end;
       }      
    }
 
 
-   return( DIAG_PASS );
+   return( fail );
 
 
    }
@@ -89,7 +90,7 @@ register UINT32      xx, expd, recd;
          
    error_end:
       
-   return( DIAG_FAIL );         /*diags return fail status*/
+   return( fail );         /*diags return fail status*/
 
            
-} /* End of function diag_asia_fibre_sram_test */
+} /* End of function sram_test */
