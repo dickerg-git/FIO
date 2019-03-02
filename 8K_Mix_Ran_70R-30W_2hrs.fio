@@ -18,7 +18,7 @@ numjobs=8				        #
 norandommap
 group_reporting
 refill_buffers
-unified_rw_reporting=1
+unified_rw_reporting=0
 percentile_list=99.9:99.99:99.999:99.9999:99.99999:99.999999:99.9999999	# defines percentile buckets in mS
 #################################################
 # 	    	Precondition   						#

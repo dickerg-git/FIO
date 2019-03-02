@@ -1,5 +1,5 @@
 [global]
-filename=/home/rogerd/Public/test1
+filename=/home/roger/Public/test1
 direct=1
 refill_buffers
 norandommap
@@ -7,11 +7,11 @@ randrepeat=0
 ioengine=posixaio
 loops=1
 group_reporting
+size=200g
 
 [4k_RND_WR_test]
 stonewall
 name=4k_RND_WR_test
-size=128m
 bs=4k
 iodepth=32
 numjobs=2
@@ -21,7 +21,6 @@ rwmixread=0
 [4k_RND_RD_test]
 stonewall
 name=4k_RND_RD_test
-size=128m
 bs=4k
 iodepth=32
 numjobs=2
@@ -32,7 +31,6 @@ rwmixread=100
 [4k_RND_RW_test]
 stonewall
 name=4k_RND_RW_test
-size=128m
 bs=4k
 iodepth=32
 numjobs=2

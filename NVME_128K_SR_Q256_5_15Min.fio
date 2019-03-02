@@ -1,8 +1,8 @@
 ##########################################################################################
 #
 #	Test Sequence:
-#		1) Run 128K SEQ Write for 100% of capacity
-#		2) Run 128K SEQ Read for 15 minutes
+#		1) Run 128K SEQ Read for  5 minutes
+#		2) Run 128K SEQ Read for 60 minutes
 #
 #	Notes:
 #		Purge the drive before running this test.
@@ -19,23 +19,23 @@ norandommap
 group_reporting
 refill_buffers
 unified_rw_reporting=0
-percentile_list=95.0:99.0:99.5:99.9:99.99:99.999:99.9999	# defines percentile buckets in mS
+percentile_list=95.0:99.0:99.5:99.9:99.99:99.999:99.9999:99.99999	# defines percentile buckets in mS
 
 
 
 ###################################################
-### 	   Start SEQ fill 100%    	          #
+### 	   Start SEQ read test    	          #
 ###################################################
 
-[128K_SEQ_Fill_Q128]         # Job name
+[128K_SEQ_Read_Q128_5]         # Job name
 stonewall
 numjobs=1		     # Num of jobs(accdroing to CPU threads)
 bs=128K				# block transfer size
-rw=write			# r/w
-iodepth=8
+rw=read				# r/w
+iodepth=32
 size=100%                       # Detect full file size
 time_based=0
-runtime=1800 			# max run time
+runtime=900 			#run time
 
 ###################################################
 ### 	   Start SEQ read test    	          #
@@ -46,8 +46,8 @@ stonewall
 numjobs=1		     # Num of jobs(accdroing to CPU threads)
 bs=128K				# block transfer size
 rw=read				# r/w
-iodepth=128
-size=50%                        # 50% file size
+iodepth=256
+size=100%                        # 50% file size
 time_based=1
 runtime=900 			#run time
 
